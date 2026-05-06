@@ -1,6 +1,6 @@
 import os
-import requests
 import json
+import requests
 from datetime import datetime
 
 
@@ -50,7 +50,6 @@ def fetch_leetcode_stats():
         result = {"ranking": ranking}
         for item in stats:
             result[item["difficulty"].lower()] = item["count"]
-
         return result
     except Exception as e:
         print(f"LeetCode fetch failed: {e}")
@@ -59,39 +58,25 @@ def fetch_leetcode_stats():
 
 # ─── HACKERRANK ─────────────────────────────────────────
 def fetch_hackerrank_stats():
-    username = os.environ.get("HACKERRANK_USERNAME")
-    password = os.environ.get("HACKERRANK_PASSWORD")
+    username   = os.environ.get("HACKERRANK_USERNAME")
+    session_id = os.environ.get("HACKERRANK_SESSION_ID")
+    mixpanel   = os.environ.get("HACKERRANK_MIXPANEL_TOKEN")
 
-    session = requests.Session()
+    headers = {
+        "Cookie": f"session_id={session_id}; hackerrank_mixpanel_token={mixpanel}",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+        "Referer": "https://www.hackerrank.com"
+    }
 
     try:
-        login_url = "https://www.hackerrank.com/auth/login"
-        session.get(login_url, timeout=10)
-
-        csrf = session.cookies.get("_csrf_token")
-
-        payload = {
-            "login": username,
-            "password": password,
-            "remember_me": False,
-            "_csrf_token": csrf
-        }
-
-        headers = {
-            "Content-Type": "application/json",
-            "X-CSRF-Token": csrf,
-            "Referer": login_url
-        }
-
-        session.post(login_url, json=payload, headers=headers, timeout=10)
-
-        profile_url = f"https://www.hackerrank.com/rest/hackers/{username}/scores_elo"
-        response = session.get(profile_url, timeout=10)
+        url = f"https://www.hackerrank.com/rest/hackers/{username}/submission_histories"
+        response = requests.get(url, headers=headers, timeout=10)
         data = response.json()
+        total = sum(data.values()) if isinstance(data, dict) else 0
 
         return {
-            "total_solved": data.get("total", 0),
-            "rank": data.get("rank", "N/A")
+            "total_solved": total,
+            "rank": "N/A"
         }
     except Exception as e:
         print(f"HackerRank fetch failed: {e}")
@@ -100,35 +85,8 @@ def fetch_hackerrank_stats():
 
 # ─── STRATASCRATCH ──────────────────────────────────────
 def fetch_stratascratch_stats():
-    username = os.environ.get("STRATASCRATCH_USERNAME")
-    password = os.environ.get("STRATASCRATCH_PASSWORD")
-
-    session = requests.Session()
-
-    try:
-        login_url = "https://platform.stratascratch.com/auth/login"
-        session.get(login_url, timeout=10)
-
-        payload = {
-            "username": username,
-            "password": password
-        }
-
-        session.post(login_url, json=payload, timeout=10)
-
-        profile_url = f"https://platform.stratascratch.com/api/user/{username}/stats"
-        response = session.get(profile_url, timeout=10)
-        data = response.json()
-
-        return {
-            "total_solved": data.get("solved", 0),
-            "easy": data.get("easy", 0),
-            "medium": data.get("medium", 0),
-            "hard": data.get("hard", 0)
-        }
-    except Exception as e:
-        print(f"StrataScratch fetch failed: {e}")
-        return {"total_solved": 0, "easy": 0, "medium": 0, "hard": 0}
+    # No public API available — manually update strata_total in update_progress.py
+    return {"total_solved": 0, "easy": 0, "medium": 0, "hard": 0}
 
 
 # ─── MAIN ───────────────────────────────────────────────

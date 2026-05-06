@@ -11,10 +11,13 @@ def load_stats():
 
 # ─── UPDATE PROGRESS.MD ─────────────────────────────────
 def update_progress(stats):
-    date      = stats["date"]
-    leetcode  = stats["leetcode"]
+    date       = stats["date"]
+    leetcode   = stats["leetcode"]
     hackerrank = stats["hackerrank"]
-    strata    = stats["stratascratch"]
+
+    # StrataScratch manually update karo
+    # Jado naye problems solve karo bas yeh number change karo
+    strata_total = 15
 
     new_entry = f"""
 ## {date}
@@ -31,36 +34,29 @@ def update_progress(stats):
 ### 🟢 HackerRank
 | Metric | Value |
 |--------|-------|
-| Total Solved | {hackerrank.get('total_solved', 0)} |
-| Rank | {hackerrank.get('rank', 'N/A')} |
+| Total Submissions | {hackerrank.get('total_solved', 0)} |
 
 ### 🔵 StrataScratch
 | Metric | Value |
 |--------|-------|
-| Easy Solved | {strata.get('easy', 0)} |
-| Medium Solved | {strata.get('medium', 0)} |
-| Hard Solved | {strata.get('hard', 0)} |
-| Total Solved | {strata.get('total_solved', 0)} |
+| Total Solved | {strata_total} |
 
 ---
 """
 
-    # Read existing progress
     if os.path.exists("progress.md"):
         with open("progress.md", "r") as f:
             existing = f.read()
     else:
         existing = "# 📊 Coding Progress Tracker\n\n"
 
-    # Check if today already logged
     if date in existing:
         print(f"Already logged for {date} — skipping")
         return
 
-    # Append new entry at top after header
-    lines = existing.split("\n")
-    header = lines[0]
-    rest   = "\n".join(lines[1:])
+    lines   = existing.split("\n")
+    header  = lines[0]
+    rest    = "\n".join(lines[1:])
     updated = f"{header}\n{new_entry}{rest}"
 
     with open("progress.md", "w") as f:
