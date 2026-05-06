@@ -1,6 +1,11 @@
-# 📈 Coding Practice Progress
+# 📊 Coding Progress Tracker — Iqbaldeep Singh Bhullar
 
-Daily coding statistics synced from LeetCode, StrataScratch, and HackerRank.
+> Auto-synced daily from LeetCode, HackerRank & StrataScratch
+
+| Platform | Profile |
+|----------|---------|
+| 🟡 LeetCode | [IqbalBhullar](https://leetcode.com/IqbalBhullar) |
+| 🟢 HackerRank | [IqbalBhullar](https://www.hackerrank.com/IqbalBhullar) |
+| 🔵 StrataScratch | [IqbalBhullar](https://platform.stratascratch.com/user/IqbalBhullar) |
 
 ---
-
