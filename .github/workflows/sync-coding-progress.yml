@@ -43,6 +43,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
+          git pull --rebase origin main
           git add progress.md stats.json
           git diff --staged --quiet || git commit -m "Auto-sync coding progress $(date +'%Y-%m-%d')"
           git push
