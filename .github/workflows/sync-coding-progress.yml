@@ -3,7 +3,10 @@ name: Sync Coding Progress
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'  # Daily at midnight UTC
+    - cron: '0 0 * * *'
+
+permissions:
+  contents: write        # ← yeh line fix karti hai 403 error
 
 jobs:
   sync:
@@ -11,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4      # ← v3 → v4 (Node.js warning fix)
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5  # ← v4 → v5 (Node.js warning fix)
         with:
           python-version: '3.10'
 
