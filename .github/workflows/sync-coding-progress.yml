@@ -36,7 +36,8 @@ jobs:
           LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
           LEETCODE_CSRF_TOKEN: ${{ secrets.LEETCODE_CSRF_TOKEN }}
           HACKERRANK_USERNAME: ${{ secrets.HACKERRANK_USERNAME }}
-          HACKERRANK_PASSWORD: ${{ secrets.HACKERRANK_PASSWORD }}
+          HACKERRANK_SESSION_ID: ${{ secrets.HACKERRANK_SESSION_ID }}
+          HACKERRANK_MIXPANEL_TOKEN: ${{ secrets.HACKERRANK_MIXPANEL_TOKEN }}
           STRATASCRATCH_USERNAME: ${{ secrets.STRATASCRATCH_USERNAME }}
           STRATASCRATCH_PASSWORD: ${{ secrets.STRATASCRATCH_PASSWORD }}
         run: python scripts/fetch_stats.py
