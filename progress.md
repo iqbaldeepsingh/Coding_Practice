@@ -1,5 +1,28 @@
 # 📊 Coding Progress Tracker — Iqbaldeep Singh Bhullar
 
+## 2026-07-04
+
+### 🟡 LeetCode
+| Metric | Value |
+|--------|-------|
+| Easy Solved | 62 |
+| Medium Solved | 39 |
+| Hard Solved | 7 |
+| Total Solved | 108 |
+| Ranking | 1531338 |
+
+### 🟢 HackerRank
+| Metric | Value |
+|--------|-------|
+| Total Submissions | 21 |
+
+### 🔵 StrataScratch
+| Metric | Value |
+|--------|-------|
+| Total Solved | 15 |
+
+---
+
 ## 2026-07-03
 
 ### 🟡 LeetCode
