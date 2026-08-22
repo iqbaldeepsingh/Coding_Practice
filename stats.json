@@ -1,11 +1,11 @@
 {
-  "date": "2026-08-21",
+  "date": "2026-08-22",
   "leetcode": {
-    "ranking": 1346564,
-    "all": 125,
+    "ranking": 1347574,
+    "all": 126,
     "easy": 70,
     "medium": 48,
-    "hard": 7
+    "hard": 8
   },
   "hackerrank": {
     "total_solved": 21,
